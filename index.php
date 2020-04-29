@@ -125,13 +125,13 @@ while($myrow = $records->fetch()){
     <td>%s</td>
     <td>%s</td>
     <td>%s</td>
-    <td>%s</td>
+    <td>%s <i v-if='%s == 1'>&#169;</i></td>
     <td v-if='!guest'>
       <a @click='updateTask(%s)'  style='cursor: pointer'><img src='/assets/img/pencil.png'/></a>
       <a @click='deleteTask(%s)' style='cursor: pointer'><img src='/assets/img/trash.png'/></a>
     </td>
     </tr>
-    ", $myrow['id'], $myrow['name'], $myrow['email'], $myrow['task'], $myrow['status'], $myrow['id'], $myrow['id']);
+    ", $myrow['id'], $myrow['name'], $myrow['email'], $myrow['task'], $myrow['status'], $myrow['updated_by'], $myrow['id'], $myrow['id']);
      
 }
 

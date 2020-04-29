@@ -60,12 +60,12 @@ class CrudTask
                 $pdo = $connection->dbConnect();
                 $pdo->beginTransaction();                
                 $sql = "UPDATE `tasks` SET `name` = :name,  `email` = :email, 
-                `task` = :task, `status` = :status 
+                `task` = :task, `status` = :status, `updated_by` = :updated_by 
                 WHERE `id` = :taskId;";
                               
                 $statement = $pdo->prepare($sql);
                 $statement->execute([':taskId' => $taskId, ':name' => $name, 
-                ':email' => $email, ':task' => $taskChars, ':status' => $status]);                
+                ':email' => $email, ':task' => $taskChars, ':status' => $status, 'updated_by' => 1]);                
                 $pdo->commit();
         } catch (\Exception $e) {
             $pdo->rollBack();

@@ -18,16 +18,17 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `email` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   `task` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   `status` enum('New','Complete') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'New',
+  `updated_by` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Дамп данных таблицы beejee.tasks: ~0 rows (приблизительно)
+-- Дамп данных таблицы beejee.tasks: ~4 rows (приблизительно)
 /*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
-INSERT INTO `tasks` (`id`, `name`, `email`, `task`, `status`) VALUES
-	(1, 'John', 'john@mail.com', 'first', 'New'),
-	(2, 'Mary', 'mary@mail.com', 'second', 'New'),
-	(3, 'Bany', 'bany@mail.com', 'third', 'New'),
-	(4, 'Any', 'any@mail.com', 'Evil\'); DROP TABLE drop_table;--', 'New');
+INSERT INTO `tasks` (`id`, `name`, `email`, `task`, `status`, `updated_by`) VALUES
+	(1, 'John', 'john@mail.com', 'first', 'New', 0),
+	(2, 'Mary', 'mary@mail.com', 'second', 'New', 0),
+	(3, 'Bany', 'bany@mail.com', 'third', 'New', 0),
+	(4, 'Any', 'any@mail.com', 'Evil\'); DROP TABLE drop_table;--', 'New', 0);
 /*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
