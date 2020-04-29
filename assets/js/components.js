@@ -390,6 +390,8 @@ new Vue({
         dataList: {id: "1", name: "Bany", email: "bany@mail.com", task: "first", status: "New"},
         paramName: 'name',
         typeName: 'ASC',
+        paramEmail: 'email',
+        typeEmail: 'ASC',
         paramStatus: 'status',
         typeStatus: 'ASC',
         paramId: 'id',
@@ -536,6 +538,14 @@ new Vue({
             else if(sortParam == 'status' && sortType == 'DESC'){
                 this.paramStatus = 'id'
                 this.typeStatus = 'ASC'
+            }
+
+            if(sortParam == 'email' && sortType == 'ASC'){
+                this.typeEmail = 'DESC'
+            }
+            else if(sortParam == 'email' && sortType == 'DESC'){
+                this.paramEmail = 'id'
+                this.typeEmail = 'ASC'
             }
 
             if(sortParam == 'id' && sortType == 'ASC'){

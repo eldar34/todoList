@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
-    <link href="/assets/font/css/all.css" rel="stylesheet">
+    <!-- <link href="/assets/font/css/all.css" rel="stylesheet"> -->
     <title>Document</title>
 </head>
 
@@ -84,7 +84,7 @@ $result = $pagination->get_page_content();
                   <tr>
                     <th scope="col"><a @click="sortTask(paramId, typeId)" style="cursor: pointer">#</a></th>                    
                     <th scope="col"><a @click="sortTask(paramName, typeName)" style="cursor: pointer">Name</a></th>
-                    <th scope="col">Email</th>
+                    <th scope="col"><a @click="sortTask(paramEmail, typeEmail)" style="cursor: pointer">Email</a></th>
                     <th scope="col">Task</th>
                     <th scope="col"><a @click="sortTask(paramStatus, typeStatus)" style="cursor: pointer">Status</a></th>
                     <th v-if="!guest" scope="col">Actions</th>                      
@@ -109,8 +109,8 @@ while($myrow = $records->fetch()){
     <td>%s</td>
     <td>%s</td>
     <td v-if='!guest'>
-      <button @click='updateTask(%s)'><i class='fas fa-pencil-alt'></i></button>
-      <button @click='deleteTask(%s)'><i class='fas fa-trash-alt'></i></button>
+      <a @click='updateTask(%s)'  style='cursor: pointer'><img src='/assets/img/pencil.png'/></a>
+      <a @click='deleteTask(%s)' style='cursor: pointer'><img src='/assets/img/trash.png'/></a>
     </td>
     </tr>
     ", $myrow['id'], $myrow['name'], $myrow['email'], $myrow['task'], $myrow['status'], $myrow['id'], $myrow['id']);

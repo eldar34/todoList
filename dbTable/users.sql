@@ -12,7 +12,7 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- Дамп структуры для таблица beejee.users
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE IF NOT EXISTS `bee_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '0',
   `surname` varchar(50) NOT NULL DEFAULT '0',
@@ -26,10 +26,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 -- Дамп данных таблицы beejee.users: ~1 rows (приблизительно)
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`id`, `name`, `surname`, `email`, `password`, `online`, `last_act`, `salt`) VALUES
+/*!40000 ALTER TABLE `bee_users` DISABLE KEYS */;
+INSERT INTO `bee_users` (`id`, `name`, `surname`, `email`, `password`, `online`, `last_act`, `salt`) VALUES
 	(5, 'John', 'Smith', 'admin', '9a91ddbc582ba5146d85af5d0dddcef5', '2020-04-29 11:17:46', '2020-04-29 11:17:46', '1588137382');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+/*!40000 ALTER TABLE `bee_users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

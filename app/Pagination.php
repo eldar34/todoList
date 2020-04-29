@@ -37,7 +37,7 @@ class Pagination
         $sort_param = 'id';
         return $sort_param;
       }else{
-        $paramsArray = ['name', 'status'];
+        $paramsArray = ['name', 'status', 'email', 'id'];
         $sort_param = $_GET['sort_param'];       
         if(in_array($sort_param, $paramsArray)){
           $validParam = $sort_param;

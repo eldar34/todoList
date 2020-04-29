@@ -20,7 +20,7 @@ class Auth
             $login = $login;
             $password = $pass;
 
-            $rez = $pdo->query("SELECT * FROM users WHERE email='$login'"); //запрашивается строка из базы данных с логином, введённым пользователем      
+            $rez = $pdo->query("SELECT * FROM bee_users WHERE email='$login'"); //запрашивается строка из базы данных с логином, введённым пользователем      
             if ($rez->rowCount() == 1) //если нашлась одна строка, значит такой юзер существует в базе данных       
             {
                 $myrow = $rez->fetch();
@@ -67,7 +67,7 @@ class Auth
 
         $tm = date('Y-m-d H:i:s');
 
-        $pdo->query("UPDATE users SET online='$tm', last_act='$tm' WHERE id='$id'");
+        $pdo->query("UPDATE bee_users SET online='$tm', last_act='$tm' WHERE id='$id'");
     }
 
     public function login()
@@ -96,7 +96,7 @@ class Auth
             } else
             //иначе добавляются cookie с логином и паролем, чтобы после перезапуска браузера сессия не слетала         
             {
-                $rez = $pdo->query("SELECT * FROM users WHERE id='{$_SESSION['id']}'");
+                $rez = $pdo->query("SELECT * FROM bee_users WHERE id='{$_SESSION['id']}'");
                 //запрашивается строка с искомым id 
                 $rez->fetch();
 
@@ -122,7 +122,7 @@ class Auth
                 //$userName = str_replace(['2', '1'], ['@', '.'], $_COOKIE['login']);
                 $userName = $_COOKIE['login'];
 
-                $rez = $pdo->query("SELECT * FROM users WHERE email='$userName'");
+                $rez = $pdo->query("SELECT * FROM bee_users WHERE email='$userName'");
                 //запрашивается строка с искомым логином и паролем             
                 $myrow = $rez->fetch();
 
@@ -157,7 +157,7 @@ class Auth
         session_start();
         $id = $_SESSION['id'];
 
-        $pdo->query("UPDATE users SET online=0 WHERE id='$id'");
+        $pdo->query("UPDATE bee_users SET online=0 WHERE id='$id'");
         //обнуляется поле online, говорящее, что пользователь вышел с сайта (пригодится в будущем)     
         unset($_SESSION['id']); //удалятся переменная сессии  
 
@@ -210,7 +210,7 @@ class Auth
                 // $userName = str_replace(['2', '1'], ['@', '.'], $_COOKIE['login']);
                 $userName = $_COOKIE['login'];
 
-                $rez = $pdo->query("SELECT * FROM users WHERE email='$userName'");
+                $rez = $pdo->query("SELECT * FROM bee_users WHERE email='$userName'");
                 
                 //запрашивается строка с искомым id
 
@@ -245,7 +245,7 @@ class Auth
             } else
             //иначе добавляются cookie с логином и паролем, чтобы после перезапуска браузера сессия не слетала         
             {
-                $rez = $pdo->query("SELECT * FROM users WHERE id='{$_SESSION['id']}'");
+                $rez = $pdo->query("SELECT * FROM bee_users WHERE id='{$_SESSION['id']}'");
                 //запрашивается строка с искомым id
 
                 if ($rez->rowCount() == 1) //если получена одна строка         
@@ -285,7 +285,7 @@ class Auth
             {
                 $userName = str_replace(['2', '1'], ['@', '.'], $_COOKIE['login']);
 
-                $rez = $pdo->query("SELECT * FROM users WHERE email='$userName'");
+                $rez = $pdo->query("SELECT * FROM bee_users WHERE email='$userName'");
                 //запрашивается строка с искомым логином и паролем             
                 $myrow = $rez->fetch();
 
