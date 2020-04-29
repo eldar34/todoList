@@ -83,10 +83,28 @@ $result = $pagination->get_page_content();
                 <thead>
                   <tr>
                     <th scope="col"><a @click="sortTask(paramId, typeId)" style="cursor: pointer">#</a></th>                    
-                    <th scope="col"><a @click="sortTask(paramName, typeName)" style="cursor: pointer">Name</a></th>
-                    <th scope="col"><a @click="sortTask(paramEmail, typeEmail)" style="cursor: pointer">Email</a></th>
+                    <th scope="col">
+                      <a @click="sortTask(paramName, typeName)" style="cursor: pointer">
+                        Name 
+                        <i v-if="paramCurrent == 'name' && sortCurrent == 'ASC'">&#8595;</i>
+                        <i v-if="paramCurrent == 'name' && sortCurrent == 'DESC'">&#8593;</i>
+                      </a>
+                    </th>
+                    <th scope="col">
+                      <a @click="sortTask(paramEmail, typeEmail)" style="cursor: pointer">
+                        Email
+                        <i v-if="paramCurrent == 'email' && sortCurrent == 'ASC'">&#8595;</i>
+                        <i v-if="paramCurrent == 'email' && sortCurrent == 'DESC'">&#8593;</i>
+                      </a>
+                    </th>
                     <th scope="col">Task</th>
-                    <th scope="col"><a @click="sortTask(paramStatus, typeStatus)" style="cursor: pointer">Status</a></th>
+                    <th scope="col">
+                      <a @click="sortTask(paramStatus, typeStatus)" style="cursor: pointer">
+                        Status
+                        <i v-if="paramCurrent == 'status' && sortCurrent == 'ASC'">&#8595;</i>
+                        <i v-if="paramCurrent == 'status' && sortCurrent == 'DESC'">&#8593;</i>
+                      </a>
+                    </th>
                     <th v-if="!guest" scope="col">Actions</th>                      
                   </tr>
                 </thead>

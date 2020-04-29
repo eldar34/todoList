@@ -388,6 +388,10 @@ new Vue({
         guest: true,
         taskId: 1,
         dataList: {id: "1", name: "Bany", email: "bany@mail.com", task: "first", status: "New"},
+        // Текущий индикатор сортировки
+        sortCurrent: 'ASC',
+        paramCurrent: 'id',
+        // Группа переменных для сортировки полей (name, email, staus, id)
         paramName: 'name',
         typeName: 'ASC',
         paramEmail: 'email',
@@ -516,6 +520,8 @@ new Vue({
         eventEmmiter.$on('loginTry', () => {
             this.guest = false;
         }); 
+
+        // Начало сортировки полей
         
         if (window.location.href.match(/.*\?.*/))
         {
@@ -523,6 +529,8 @@ new Vue({
             let testArray = strGET.split("&");
             let sortParam = testArray[1].substr(11); 
             let sortType = testArray[2].substr(10);
+            this.sortCurrent = sortType;
+            this.paramCurrent = sortParam;
             
             if(sortParam == 'name' && sortType == 'ASC'){
                 this.typeName = 'DESC'
@@ -556,6 +564,8 @@ new Vue({
                 this.typeId = 'ASC'
             }
         }
+
+        // Конец сортировки полей
          
 
             
