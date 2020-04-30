@@ -12,7 +12,7 @@ class CreateRecord
         $response = [];
         $errors = [];
         try {
-                $taskChars = htmlspecialchars($task, ENT_HTML5);
+                $taskChars = htmlentities($task, ENT_QUOTES | ENT_HTML5, "UTF-8");
 
                 $connection = new Connection();
                 $pdo = $connection->dbConnect();

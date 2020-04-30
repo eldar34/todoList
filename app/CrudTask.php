@@ -44,6 +44,10 @@ class CrudTask
             exit;
         }
         $fields = $statement->fetch();
+        /** 
+        *   Dangerous
+        *   $fields['task'] = html_entity_decode($fields['task'], ENT_QUOTES | ENT_HTML5, "UTF-8");
+        */        
         $response['status'] = 'success';
         $response['fields'] = $fields;
         return $response;
@@ -55,7 +59,8 @@ class CrudTask
         $response = [];
         $errors = [];
         try {
-                $taskChars = htmlspecialchars($task, ENT_HTML5);
+                $taskChars = htmlentities($task, ENT_QUOTES | ENT_HTML5, "UTF-8");
+
                 $connection = new Connection();
                 $pdo = $connection->dbConnect();
                 $pdo->beginTransaction();                
