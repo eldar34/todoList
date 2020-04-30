@@ -19,7 +19,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use App\Pagination;
 
-$pagination = new Pagination(3, 'tasks');
+$sortFields = ['name', 'status', 'email', 'id'];
+$pagination = new Pagination(3, 'tasks', $sortFields);
 $page = $pagination->get_page();
 $result = $pagination->get_page_content();
 

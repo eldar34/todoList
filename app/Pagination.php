@@ -8,11 +8,13 @@ class Pagination
 {
     private $num;
     private $tableName;
+    private $sortFields;
 
-    public function __construct($num, $tableName)
+    public function __construct($num, $tableName, $sortFields)
     {
         $this->num = $num;
         $this->tableName = $tableName;
+        $this->sortFields = $sortFields;
     }
 
     public function get_page(){
@@ -37,7 +39,7 @@ class Pagination
         $sort_param = 'id';
         return $sort_param;
       }else{
-        $paramsArray = ['name', 'status', 'email', 'id'];
+        $paramsArray = $this->sortFields;
         $sort_param = $_GET['sort_param'];       
         if(in_array($sort_param, $paramsArray)){
           $validParam = $sort_param;
