@@ -38,7 +38,7 @@ class Validate
         $response = [];
         $errors = [];
 
-        if (filter_var($props, FILTER_VALIDATE_EMAIL) || $props = 'admin') {
+        if (filter_var($props, FILTER_VALIDATE_EMAIL)) {
             $response['status'] = 'success';
             $response['field'] = $fieldName;
             return $response;
@@ -57,7 +57,7 @@ class Validate
         $errors = [];
 
         if($props == $conf){
-            if(preg_match('/^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{4,12}$/', $props) || $props == '123'){
+            if(preg_match('/^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{4,12}$/', $props)){
                 //^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{4,12}$
                 $response['status'] = 'success';
                 $response['field'] = $fieldName;
@@ -84,7 +84,9 @@ class Validate
 
         $response = [];
         $errors = [];
-        $len = strlen($props);
+
+        $taskChars = htmlentities($props, ENT_QUOTES | ENT_HTML5, "UTF-8");
+        $len = strlen($taskChars);
 
         if($len<=250){
             $response['status'] = 'success';
@@ -111,7 +113,7 @@ class Validate
             $response['field'] = $fieldName;
             return $response;
         }else{
-            array_push($errors,' must be string New or Complete '.$props);
+            array_push($errors,' must be string New or Complete. NotValid = '.$props);
             array_push($errors,' должно быть строкой New или Complete');
             $response['status'] = 'error';
             $response['field'] = $fieldName;

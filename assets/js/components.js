@@ -34,9 +34,9 @@ const CreateTask = {
               </div>
           </div>
           <div class="form-group row">
-              <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+              <label for="createEmail" class="col-sm-2 col-form-label">Email</label>
               <div class="col-sm-10">
-                  <input type="text" class="form-control" id="staticEmail" name="staticEmail" aria-describedby="emailHelp" placeholder="name@example.com">
+                  <input type="text" class="form-control" id="createEmail" name="createEmail" aria-describedby="emailHelp" placeholder="name@example.com">
                   <div class="invalid-feedback">
                   </div>
               </div>                        
@@ -68,7 +68,7 @@ const CreateTask = {
             //Добавление полей в формы в объект FormData() - передача файлов
             var userData = new FormData();
             userData.append('name', $('input[name="staticName"]').val());            
-            userData.append('email', $('input[name="staticEmail"]').val());
+            userData.append('email', $('input[name="createEmail"]').val());
             userData.append('task', $('input[name="staticTask"]').val());
 
             $.ajax({
@@ -80,9 +80,10 @@ const CreateTask = {
                 success: function (data) {
 
                     let result = JSON.parse(data);
-                    console.log(result);
-                    //Смена языка вывода ошибок
-                    let position = $('#langPosition').val();
+                    
+                    // Смена языка вывода ошибок
+                    // let position = $('#langPosition').val();
+                    let position = 0;
                     let errorCount = 0;
                     // console.log(result);
                     
@@ -197,7 +198,7 @@ const LoginPage = {
                     let position = 0;                    
                     let errorCount = 0;
                     let result = JSON.parse(data);
-                    //console.log('auth' in result);
+                    // console.log('auth' in result);
                     // console.log(result);
                     if ('auth' in result) {
                         if (result.auth == 'login') {
@@ -205,8 +206,7 @@ const LoginPage = {
                             eventEmmiter.$emit('loginTry');
                             $('#exampleModalLogin').modal('toggle');
                         } else {
-                            // console.log(position);
-                             console.log(result);
+                            // console.log(position);                        
                             
                             $('input[id*=staticEmailLogin]').removeClass('is-valid');
                             $('input[id*=staticEmailLogin]').addClass('is-invalid');
@@ -291,7 +291,7 @@ Vue.component('update-task', {
                         <option selected>{{ dataList.status }}</option>
                         <option v-if="dataList.status == 'Complete'">New</option>
                         <option v-if="dataList.status == 'New'">Complete</option>
-                    </select>
+                    </select>                    
                     <div class="invalid-feedback">
                     </div>
                 </div>
@@ -334,35 +334,49 @@ methods: {
                     }, 3000);
                     $('#updateTask').modal('toggle');                    
                 } else {
+                        // console.log(result);
+                        // Отображение результатов валидации                       
                         result.forEach(function (item, i, arr) {
                             let gj = item.field;
-                            //let anotherFields = ['taskId', 'staticDB'];
-                            
-                            if (item.status == 'error') {
-                                errorCount++;
-                                let fieldName = $('label[for*=' + gj + ']').text();
+                            let anotherFields = ['taskId', 'staticDB'];
 
-                                $('input[id*=' + gj + ']').removeClass('is-valid');
-                                $('input[id*=' + gj + ']').addClass('is-invalid');
-                                $('input[id*=' + gj + ']').next().text(fieldName + item.errors[position])
-                            } else {
-                                if (gj != 'staticDB' || gj != 'taskId'){
+                            if (!anotherFields.includes(gj)){
+
+                                if (item.status == 'error') {
+                                    errorCount++;
+                                    let fieldName = $('label[for*=' + gj + ']').text();                                  
+    
+                                    $('input[id*=' + gj + ']').removeClass('is-valid');
+                                    $('input[id*=' + gj + ']').addClass('is-invalid');
+                                    $('input[id*=' + gj + ']').next().text(fieldName + item.errors[position])
+
+                                    // bad solution
+                                    $('select[id*=' + gj + ']').removeClass('is-valid');
+                                    $('select[id*=' + gj + ']').addClass('is-invalid');
+                                    $('select[id*=' + gj + ']').next().text(fieldName + item.errors[position])
+                                }else{
+
                                     $('input[id*=' + gj + ']').removeClass('is-invalid');
                                     $('input[id*=' + gj + ']').addClass('is-valid');
+
+                                    // bad solution
+                                    $('select[id*=' + gj + ']').removeClass('is-invalid');
+                                    $('select[id*=' + gj + ']').addClass('is-valid');                                                                          
                                 }
-
-                                $('#regSuccess').text(
-                                    'Task with id - ' + result[5].field + ' udated successfully'
-                                );
-                                $('#regSuccess').css("display", "block");
-                                setTimeout(function () {
-                                    $('#regSuccess').fadeOut('slow');
-                                }, 3000);
-                                $('#updateTask').modal('toggle');  
-                                
                             }
-
                         });
+                    }
+
+                    if (errorCount == 0) {
+                        //Валидация прошла успешно
+                        $('#regSuccess').text(
+                            'Task with id - ' + result[5].field + ' udated successfully'
+                        );
+                        $('#regSuccess').css("display", "block");
+                        setTimeout(function () {
+                            $('#regSuccess').fadeOut('slow');
+                        }, 3000);
+                        $('#updateTask').modal('toggle');  
                     }
 
             }.bind(this),

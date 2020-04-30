@@ -46,8 +46,8 @@ class CrudTask
         $fields = $statement->fetch();
         /** 
         *   Dangerous
-        *   $fields['task'] = html_entity_decode($fields['task'], ENT_QUOTES | ENT_HTML5, "UTF-8");
-        */        
+        */   
+        $fields['task'] = html_entity_decode($fields['task'], ENT_QUOTES | ENT_HTML5, "UTF-8");        
         $response['status'] = 'success';
         $response['fields'] = $fields;
         return $response;

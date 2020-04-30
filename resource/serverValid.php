@@ -23,7 +23,7 @@ $result = [];
 $validate = new Validate();
 $validName = $validate->forName('staticName', $name);
 array_push($result, $validName);
-$validEmail = $validate->forEmail('staticEmail', $email);
+$validEmail = $validate->forEmail('createEmail', $email);
 array_push($result, $validEmail);
 $validTask = $validate->forTask('staticTask', $task);
 array_push($result, $validTask);
