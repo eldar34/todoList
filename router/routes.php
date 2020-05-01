@@ -21,6 +21,7 @@ function processOutput($response){
 $router = new RouteCollector();
 
 $router->controller('/', 'App\\Controller');
+$router->controller('/pagination/{page:i}/{sort_param:a}/{sort_type:a}', 'App\\Controller');
 
 // $router->get('/', function(){
 //     global $loader, $twig;

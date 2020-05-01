@@ -421,7 +421,7 @@ new Vue({
             let protocolName = window.location.protocol;
             let hostPort = window.location.host;
 
-            window.location.replace(protocolName + "//" + hostPort + "/index.php?page=1&sort_param=" + fieldName + "&sort_type=" + sortType);       
+            window.location.replace(protocolName + "//" + hostPort + "/pagination/1/" + fieldName + "/" + sortType);       
         },
         createTask(){            
             $('#exampleModalLong').modal();           
@@ -534,15 +534,15 @@ new Vue({
         eventEmmiter.$on('loginTry', () => {
             this.guest = false;
         }); 
+        
 
         // Начало сортировки полей
         
-        if (window.location.href.match(/.*\?.*/))
+        if (window.location.href.includes('pagination'))
         {
-            let strGET = window.location.search.replace( '?', '');
-            let testArray = strGET.split("&");
-            let sortParam = testArray[1].substr(11); 
-            let sortType = testArray[2].substr(10);
+            let testArray = window.location.href.split("/");
+            let sortParam = testArray[5]; 
+            let sortType = testArray[6];
             this.sortCurrent = sortType;
             this.paramCurrent = sortParam;
             

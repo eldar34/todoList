@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    
     <!-- <link href="/assets/font/css/all.css" rel="stylesheet"> -->
     <title>{% block title %}{% endblock %} - Document</title>
     {% endblock %}
@@ -22,9 +23,11 @@
             {% endblock %}
         </div>
     </div>
-<script type="text/javascript" src="assets/js/jquery-3.4.1.js"></script>    
-<script type="text/javascript" src="assets/js/vue.min.js"></script>
-<script type="text/javascript" src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src="assets/js/components.js"></script>
+{% block footer %}
+<script type="text/javascript" src="/assets/js/jquery-3.4.1.js"></script> 
+<script type="text/javascript" src="/assets/js/vue.min.js"></script>
+<script type="text/javascript" src="/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="/assets/js/components.js"></script>
+{% endblock %}
 </body>
 </html>
