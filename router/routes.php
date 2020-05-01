@@ -5,10 +5,7 @@ use Phroute\Phroute\Dispatcher;
 use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
 use Phroute\Phroute\Exception\HttpRouteNotFoundException;
 
-
-
-
-
+use App\Controller;
 
 function processInput($uri){
     $uri = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
@@ -23,14 +20,16 @@ function processOutput($response){
 
 $router = new RouteCollector();
 
-$router->get('/', function(){
-    global $loader, $twig;
+$router->controller('/', 'App\\Controller');
 
-    $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../views');
-    $twig = new \Twig\Environment($loader);
+// $router->get('/', function(){
+//     global $loader, $twig;
+
+//     $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../views');
+//     $twig = new \Twig\Environment($loader);
    
-    echo $twig->render('index.html', ['name' => 'Fabien']);
-});
+//     echo $twig->render('index.html', ['name' => 'Fabien']);
+// });
 
 $router->post('/resource/test', function(){
     $result = [];

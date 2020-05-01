@@ -88,7 +88,7 @@ class Pagination
         $number_of_results = $result4->rowCount();
         $number_of_pages = ceil($number_of_results/$this->num);
 
-        $result_array['records'] = $result2;        
+        $result_array['records'] = $result2->fetchAll();        
         $result_array['number_of_pages'] = $number_of_pages;
 
         return $result_array;
