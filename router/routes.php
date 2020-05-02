@@ -42,15 +42,6 @@ $router->post('/read-task', ['App\Controllers\TaskController', 'readTask'], ['be
 $router->post('/update-task', ['App\Controllers\TaskController', 'updateTask'], ['before' => 'check-auth']);
 $router->post('/delete-task', ['App\Controllers\TaskController', 'deleteTask'], ['before' => 'check-auth']);
 
-$router->post('/resource/test', function(){
-    $result = [];
-    $first = ['status' => 'success', 'field' => 'staticName'];
-    array_push($result, $first);
-    $second = ['status' => 'error', 'field' => 'staticEmail'];
-    array_push($result, $second);
-    
-    return json_encode($result);
-});
 
 $dispatcher =  new Dispatcher($router->getData());
 
