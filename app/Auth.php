@@ -231,16 +231,14 @@ class Auth
                     $response['surname'] = $myrow['surname'];
                     $response['email'] = $myrow['email'];
                     $response['file'] = $myrow['file'];
-                    echo json_encode($response);
-                    exit;
+                    return $response;
                 } else {
                     $error[] = 'User logout';
                     $error[] = 'Пользователь вышел';
 
                     $response['auth'] = 'logout';
                     $response['errors'] = $error;
-                    echo json_encode($response);
-                    exit;
+                    return $response;
                 }
             } else
             //иначе добавляются cookie с логином и паролем, чтобы после перезапуска браузера сессия не слетала         
@@ -265,16 +263,14 @@ class Auth
                     $response['surname'] = $myrow['surname'];
                     $response['email'] = $myrow['email'];
                     $response['file'] = $myrow['file'];
-                    echo json_encode($response);
-                    exit;
+                    return $response;
                 } else {
                     $error[] = 'User logout';
                     $error[] = 'Пользователь вышел';
 
                     $response['auth'] = 'logout';
                     $response['errors'] = $error;
-                    echo json_encode($response);
-                    exit;
+                    return $response;
                 }
             }
         } else
@@ -303,8 +299,7 @@ class Auth
                     $response['surname'] = $myrow['surname'];
                     $response['email'] = $myrow['email'];
                     $response['file'] = $myrow['file'];
-                    echo json_encode($response);
-                    exit;
+                    return $response;
                 } else //если данные из cookie не подошли, эти куки удаляются             
                 {
                     SetCookie("login", "", time() - 360000, '/');
@@ -315,8 +310,7 @@ class Auth
 
                     $response['auth'] = 'logout';
                     $response['errors'] = $error;
-                    echo json_encode($response);
-                    exit;
+                    return $response;
                 }
             } else //если куки не существуют      
             {
@@ -325,8 +319,7 @@ class Auth
 
                 $response['auth'] = 'logout';
                 $response['errors'] = $error;
-                echo json_encode($response);
-                exit;
+                return $response;
             }
         }
     }

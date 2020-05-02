@@ -5,7 +5,7 @@ use Phroute\Phroute\Dispatcher;
 use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
 use Phroute\Phroute\Exception\HttpRouteNotFoundException;
 
-use App\Controller;
+use App\Auth;
 
 function processInput($uri){
     $uri = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
@@ -20,8 +20,19 @@ function processOutput($response){
 
 $router = new RouteCollector();
 
+// $router->filter('checkauth', function(){   
+    
+//     $auth = new Auth();
+//     $reusult = $auth->loginAjax(); //функция входа на сайт 
+//     return true;  
+//     return json_encode($reusult);  
+   
+// });
+
 $router->controller('/', 'App\\Controller');
 $router->controller('/pagination/{page:i}/{sort_param:a}/{sort_type:a}', 'App\\Controller');
+$router->controller('/checkauth', 'App\\Controller');
+$router->controller('/createtask', 'App\\Controller');
 
 // $router->get('/', function(){
 //     global $loader, $twig;

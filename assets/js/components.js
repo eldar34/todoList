@@ -73,7 +73,7 @@ const CreateTask = {
 
             $.ajax({
                 type: 'POST',
-                url: '/resource/serverValid.php',
+                url: '/createtask',
                 data: userData,
                 processData: false,
                 contentType: false,
@@ -580,14 +580,12 @@ new Vue({
         }
 
         // Конец сортировки полей
-         
-
             
     },
     beforeCreate: function () {
         $.ajax({
             type: 'POST',
-            url: '/resource/serverLogin.php',
+            url: '/checkauth',
 
             success: function (data) {
                 let result = JSON.parse(data);
