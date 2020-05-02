@@ -99,7 +99,7 @@
   <nav aria-label="Page navigation example">
     <ul class="pagination">
       {% for mypage in range(1, number_of_pages, 1) %}
-      <li class="page-item">
+      <li class="page-item {% if mypage == page %} active {% endif %}">
         <a class="page-link" href="/pagination/{{mypage}}/{{sort_params}}/{{sort_type}}">{{ mypage }}</a>
       </li>
       {% endfor %}

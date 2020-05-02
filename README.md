@@ -14,4 +14,4 @@ psc=''; //password
 </pre>
 
 # DB Table Dump
-Import table in your database from folder "dbTable"
+Import tables in your database from folder "dbTable"
