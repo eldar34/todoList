@@ -2,20 +2,13 @@
 
 namespace App\Controllers;
 
-use App\Models\Pagination;
+use App\Controllers\Controller;
+
 use App\Models\Auth;
 use App\Models\Validate;
-use App\Models\CreateRecord;
 
-class UserController {
-    private $loader;
-    private $twig;
 
-    public function __construct()
-    {
-        $this->loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../../views');
-        $this->twig = new \Twig\Environment($this->loader);        
-    }
+class UserController extends Controller {
 
     public function Login()
     {
@@ -93,4 +86,12 @@ class UserController {
             }
         }
     }
+
+    public function userAuth()
+    {
+        $auth = new Auth();
+        $reusult = $auth->loginAjax(); //функция входа на сайт 
+        return json_encode($reusult);      
+    }
+
 }

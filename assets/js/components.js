@@ -73,7 +73,7 @@ const CreateTask = {
 
             $.ajax({
                 type: 'POST',
-                url: '/createtask',
+                url: '/create-task',
                 data: userData,
                 processData: false,
                 contentType: false,
@@ -315,7 +315,7 @@ methods: {
 
         $.ajax({
             type: 'POST',
-            url: '/resource/updateTask.php',
+            url: '/update-task',
             data: msg,
 
             success: function (data) {
@@ -365,19 +365,19 @@ methods: {
                                 }
                             }
                         });
-                    }
 
-                    if (errorCount == 0) {
-                        //Валидация прошла успешно
-                        $('#regSuccess').text(
-                            'Task with id - ' + result[5].field + ' udated successfully'
-                        );
-                        $('#regSuccess').css("display", "block");
-                        setTimeout(function () {
-                            $('#regSuccess').fadeOut('slow');
-                        }, 3000);
-                        $('#updateTask').modal('toggle');  
-                    }
+                        if (errorCount == 0) {
+                            //Валидация прошла успешно
+                            $('#regSuccess').text(
+                                'Task with id - ' + result[5].field + ' udated successfully'
+                            );
+                            $('#regSuccess').css("display", "block");
+                            setTimeout(function () {
+                                $('#regSuccess').fadeOut('slow');
+                            }, 3000);
+                            $('#updateTask').modal('toggle');  
+                        }
+                    }                  
 
             }.bind(this),
             error: function (xhr, str) {
@@ -435,7 +435,7 @@ new Vue({
             this.taskId = taskId; 
             $.ajax({
                 type: 'POST',
-                url: '/resource/getTask.php',
+                url: '/read-task',
                 data: {taskId: taskId},
     
                 success: function (data) {
@@ -466,11 +466,11 @@ new Vue({
         },
 
         deleteTask(deleteId){            
-            var deleteTaskAnswer = confirm("Dlete task with id - " + deleteId + "?");
+            let deleteTaskAnswer = confirm("Dlete task with id - " + deleteId + "?");
             if(deleteTaskAnswer){
                 $.ajax({
                     type: 'POST',
-                    url: '/resource/deleteTask.php',
+                    url: '/delete-task',
                     data: {taskId: deleteId},
         
                     success: function (data) {
@@ -585,7 +585,7 @@ new Vue({
     beforeCreate: function () {
         $.ajax({
             type: 'POST',
-            url: '/checkauth',
+            url: '/user-auth',
 
             success: function (data) {
                 let result = JSON.parse(data);

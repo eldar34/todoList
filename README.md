@@ -1,11 +1,11 @@
 # INSTALLATION
 Run composer command
 <pre>
-composer dump-autoload
+composer install
 </pre>
 
 # DB Settings
-Set connection with database in file app/connection
+Set connection with database in file app/models/Connection
 <pre>
 host='' //localhost
 db=''; //database name

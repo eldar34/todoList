@@ -17,34 +17,30 @@ function processOutput($response){
     echo $response;
 }
 
-
 $router = new RouteCollector();
 
-// $router->filter('checkauth', function(){   
+$router->filter('check-auth', function(){   
     
-//     $auth = new Auth();
-//     $reusult = $auth->loginAjax(); //функция входа на сайт 
-//     return true;  
-//     return json_encode($reusult);  
-   
-// });
+    $auth = new Auth();
+    if (!$auth->login()) {
+        $response['auth'] = 'logout';
+        $response['errors'] = 'Permission denied';
+        return json_encode($response);    
+    }
+      
+});
 
-$router->controller('/', 'App\Controllers\\Controller');
-$router->controller('/pagination/{page:i}/{sort_param:a}/{sort_type:a}', 'App\Controllers\\Controller');
-$router->controller('/checkauth', 'App\Controllers\\Controller');
-$router->controller('/createtask', 'App\Controllers\\Controller');
-// $router->controller('/login', 'App\Controllers\\Usercontroller');
+$router->controller('/', 'App\Controllers\\PageController');
+$router->controller('/pagination/{page:i}/{sort_param:a}/{sort_type:a}', 'App\Controllers\\PageController');
+
+$router->post('/user-auth', ['App\Controllers\UserController', 'userAuth']);
 $router->post('/login', ['App\Controllers\UserController', 'login']);
 $router->get('/logout', ['App\Controllers\UserController', 'logout']);
 
-// $router->get('/', function(){
-//     global $loader, $twig;
-
-//     $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../views');
-//     $twig = new \Twig\Environment($loader);
-   
-//     echo $twig->render('index.html', ['name' => 'Fabien']);
-// });
+$router->post('/create-task', ['App\Controllers\TaskController', 'createTask']);
+$router->post('/read-task', ['App\Controllers\TaskController', 'readTask'], ['before' => 'check-auth']);
+$router->post('/update-task', ['App\Controllers\TaskController', 'updateTask'], ['before' => 'check-auth']);
+$router->post('/delete-task', ['App\Controllers\TaskController', 'deleteTask'], ['before' => 'check-auth']);
 
 $router->post('/resource/test', function(){
     $result = [];
