@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Connection;
-//
+
 class Auth
 {
     public function enter($login, $pass)
