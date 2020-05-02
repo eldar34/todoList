@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use App\Connection;
+use App\Models\Connection;
 
 class Auth
 {
@@ -177,8 +177,7 @@ class Auth
 
         $response['auth'] = 'logout';
         $response['errors'] = $error;
-        echo json_encode($response);
-        exit;
+        return $response;
     }
 
     public function loginAjax()

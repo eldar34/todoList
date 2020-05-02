@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use App\Connection;
+use App\Models\Connection;
 
 class CreateRecord
 {

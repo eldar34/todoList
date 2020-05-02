@@ -5,7 +5,7 @@ use Phroute\Phroute\Dispatcher;
 use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
 use Phroute\Phroute\Exception\HttpRouteNotFoundException;
 
-use App\Auth;
+use App\Models\Auth;
 
 function processInput($uri){
     $uri = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
@@ -29,10 +29,13 @@ $router = new RouteCollector();
    
 // });
 
-$router->controller('/', 'App\\Controller');
-$router->controller('/pagination/{page:i}/{sort_param:a}/{sort_type:a}', 'App\\Controller');
-$router->controller('/checkauth', 'App\\Controller');
-$router->controller('/createtask', 'App\\Controller');
+$router->controller('/', 'App\Controllers\\Controller');
+$router->controller('/pagination/{page:i}/{sort_param:a}/{sort_type:a}', 'App\Controllers\\Controller');
+$router->controller('/checkauth', 'App\Controllers\\Controller');
+$router->controller('/createtask', 'App\Controllers\\Controller');
+// $router->controller('/login', 'App\Controllers\\Usercontroller');
+$router->post('/login', ['App\Controllers\UserController', 'login']);
+$router->get('/logout', ['App\Controllers\UserController', 'logout']);
 
 // $router->get('/', function(){
 //     global $loader, $twig;

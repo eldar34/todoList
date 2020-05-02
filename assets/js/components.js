@@ -190,7 +190,7 @@ const LoginPage = {
 
             $.ajax({
                 type: 'POST',
-                url: '/resource/serverAuth.php',
+                url: '/login',
                 data: msg,
 
                 success: function (data) {
@@ -509,7 +509,7 @@ new Vue({
         logout() {
             $.ajax({
                 type: 'GET',
-                url: '/resource/serverAuth.php',
+                url: '/logout',
                 data: { action: 'out' },
 
                 success: function (data) {

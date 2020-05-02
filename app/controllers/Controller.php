@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Controllers;
 
-use App\Pagination;
-use App\Auth;
-use App\Validate;
-use App\CreateRecord;
+use App\Models\Pagination;
+use App\Models\Auth;
+use App\Models\Validate;
+use App\Models\CreateRecord;
 
 class Controller {
 
@@ -14,7 +14,7 @@ class Controller {
 
     public function __construct()
     {
-        $this->loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../views');
+        $this->loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../../views');
         $this->twig = new \Twig\Environment($this->loader);        
     }
    
