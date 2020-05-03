@@ -32,6 +32,8 @@ $router->filter('check-auth', function(){
 
 $router->controller('/', 'App\Controllers\\PageController');
 $router->controller('/pagination/{page:i}/{sort_param:a}/{sort_type:a}', 'App\Controllers\\PageController');
+$router->controller('/error/{code:a}', 'App\Controllers\\PageController');
+// $router->get('/error/{code:a}', ['App\Controllers\PageController', 'error']);
 
 $router->post('/user-auth', ['App\Controllers\UserController', 'userAuth']);
 $router->post('/login', ['App\Controllers\UserController', 'login']);
@@ -51,13 +53,16 @@ try {
 
 } catch (HttpRouteNotFoundException $e) {
 
-    var_dump($e->getMessage());
-    die();
+    // var_dump($e->getMessage());
+    // die();
+    $response = $dispatcher->dispatch('GET', '/error/404');
+    
 
 } catch (HttpMethodNotAllowedException $e) {
 
-    var_dump($e->getMessage());
-    die();
+    // var_dump($e->getMessage());
+    // die();
+    $response = $dispatcher->dispatch('GET', '/error/405');
 
 }
 

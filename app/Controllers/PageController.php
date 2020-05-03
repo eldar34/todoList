@@ -22,7 +22,7 @@ class PageController extends Controller {
         $records = $result['records'];
         $number_of_pages = $result['number_of_pages'];
         
-        echo $this->twig->render('index.html', [
+        return $this->twig->render('index.html', [
             'records' => $records, 
             'number_of_pages' => $number_of_pages,
             'page' => $page,
@@ -43,8 +43,12 @@ class PageController extends Controller {
 
         $records = $result['records'];
         $number_of_pages = $result['number_of_pages'];
+
+        if($page_usr > $number_of_pages){
+            return $this->getError('404');
+        }
         
-        echo $this->twig->render('index.html', [
+        return $this->twig->render('index.html', [
             'records' => $records, 
             'number_of_pages' => $number_of_pages,
             'page' => $page,
@@ -52,5 +56,29 @@ class PageController extends Controller {
             'sort_type' => $sort_type
             ]);        
     }
+
+    public function getError($errorCode)
+    {
+        switch($errorCode){
+            case '405':
+                $code = '405';
+                $errorTitle = ' Method Not Allowed';
+                $message = 'Requested method not allowed!';
+            break;
+
+            default:
+                $code = '404';
+                $errorTitle = ' Not Found';
+                $message = 'Sorry, an error has occured. Requested page not found!';
+        }
+
+        return $this->twig->render('error.html', [
+            'code' => $code, 
+            'errorTitle' => $errorTitle, 
+            'message' => $message, 
+            ]); 
+        
+
+     }
 
 }
