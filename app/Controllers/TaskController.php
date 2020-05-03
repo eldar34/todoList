@@ -5,8 +5,7 @@ namespace App\Controllers;
 use App\Controllers\Controller;
 
 use App\Models\Validate;
-use App\Models\CreateRecord;
-use App\Models\CrudTask;
+use App\Models\Task;
 
 class TaskController extends Controller
 {
@@ -41,12 +40,10 @@ class TaskController extends Controller
             exit;
         } else {
 
-            $create = new CreateRecord();
-            $createReacord =  $create->addRecord($name, $email, $task);
+            $create = new Task();
+            $createReacord =  $create->createTask($name, $email, $task);
             array_push($result, $createReacord);
-            return json_encode($result);
-            // echo json_encode($result);
-            // exit;
+            return json_encode($result);            
         }
     }
 
@@ -69,8 +66,8 @@ class TaskController extends Controller
             return json_encode($result);
         } else {
 
-            $getDetail = new CrudTask();
-            $getTask =  $getDetail->getTask($taskId);
+            $getDetail = new Task();
+            $getTask =  $getDetail->readTask($taskId);
             array_push($result, $getTask);
             return json_encode($result);
         }
@@ -116,7 +113,7 @@ class TaskController extends Controller
             return json_encode($result);
         } else {
 
-            $update = new CrudTask();
+            $update = new Task();
             $updateTask =  $update->updateTask($taskId, $name, $email, $task, $status);
             array_push($result, $updateTask);
             return json_encode($result);
@@ -141,7 +138,7 @@ class TaskController extends Controller
         if (in_array('error', $status_arr)) {
             return json_encode($result);            
         } else {
-            $deleteDetail = new CrudTask();
+            $deleteDetail = new Task();
             $deletedTask =  $deleteDetail->deleteTask($taskId);
             array_push($result, $deletedTask);
             return json_encode($result);           
