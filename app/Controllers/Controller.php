@@ -14,4 +14,19 @@ class Controller {
             
     }
 
+    /**
+     * 
+     * Helper for print_r result
+     * 
+     * @param string $var
+     * @return string
+     */
+
+    protected function pr($var){
+        echo "<pre>";
+        print_r($var);
+        echo "</pre>";
+        exit;
+    }
+
 }

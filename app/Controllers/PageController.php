@@ -17,9 +17,16 @@ class PageController extends Controller {
         $sort_params = $pagination->get_sort_param();
         $sort_type = $pagination->get_sort_type();
         $result = $pagination->get_page_content();
-        
 
-        $records = $result['records'];
+        $interimRecords = $result['records'];
+
+        foreach($interimRecords as &$value){                              
+            $value['task'] = $this->tagsHelper($value['task']);                  
+        }
+
+        // $this->pr($interimRecords);        
+
+        $records = $interimRecords;
         $number_of_pages = $result['number_of_pages'];
         
         return $this->twig->render('index.html', [
@@ -29,7 +36,7 @@ class PageController extends Controller {
             'sort_params' => $sort_params,
             'sort_type' => $sort_type
             ]);        
-    }
+    }   
 
     public function getPagination($page_usr, $sort_param_usr, $sort_type_usr)
     {
@@ -41,7 +48,13 @@ class PageController extends Controller {
         $sort_type = $pagination->get_sort_type($sort_type_usr);
         $result = $pagination->get_page_content($page_usr, $sort_param_usr, $sort_type_usr);
 
-        $records = $result['records'];
+        $interimRecords = $result['records'];
+
+        foreach($interimRecords as &$value){                              
+            $value['task'] = $this->tagsHelper($value['task']);                  
+        }
+
+        $records = $interimRecords;
         $number_of_pages = $result['number_of_pages'];
 
         if($page_usr > $number_of_pages){
@@ -79,6 +92,19 @@ class PageController extends Controller {
             ]); 
         
 
+     }
+
+     /**
+     * 
+     * Helper for fields vith html tags
+     * 
+     * @param string $stringTag
+     * @return string
+     */
+
+    private function tagsHelper($stringTag){
+        $result = html_entity_decode($stringTag, ENT_QUOTES | ENT_HTML5, "UTF-8");        
+        return $result;
      }
 
 }
