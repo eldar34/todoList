@@ -6,7 +6,7 @@
 /.idea
 /.vscode
 /uploaded_files
-.env
+#.env
 .env.backup
 .phpunit.result.cache
 Homestead.json

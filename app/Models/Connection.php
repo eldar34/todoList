@@ -3,10 +3,7 @@
 namespace App\Models;
 
 class Connection {
-    private $host='';
-    private $db='';
-    private $myname='eldar';
-    private $psc='';
+    
     private $dsn = "";
 
     private $opt = array(
@@ -15,13 +12,16 @@ class Connection {
     );
 
     public function dbConnect(){
-        $this->dsn = "mysql:host=$this->host;dbname=$this->db";
-        $pdo = new \PDO($this->dsn, $this->myname, $this->psc, $this->opt);
-        return $pdo;
+
+        $host= getenv('DB_HOST') !== "" ? getenv('DB_HOST') : 'db';
+        $db= getenv('DB_NAME') !== "" ? getenv('DB_NAME') : 'yourdatabase';
+        $myname= getenv('DB_USER_NAME') !== "" ? getenv('DB_USER_NAME') : 'eldar';
+        $psc= getenv('DB_PASSWORD') !== "" ? getenv('DB_PASSWORD') : 'changepass';
+
+        $this->dsn = "mysql:host=$host;dbname=$db";
+        $pdo = new \PDO($this->dsn, $myname, $psc, $this->opt);
+        return $pdo;        
     }
 }
-
-
-
 
 ?>

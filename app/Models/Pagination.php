@@ -57,26 +57,33 @@ class Pagination
 
     public function get_page_content($page_usr = 1, $sort_param_usr = 'id', $sort_type_usr = 'ASC'){
 
-        $connection = new Connection();
-        $pdo = $connection->dbConnect();        
+      $connection = new Connection();
+      $pdo = $connection->dbConnect();        
 
-        $allRecords = $pdo->query("SELECT * FROM " . $this->tableName);
-        
-        $page = $this->get_page($page_usr);
-        $sort_param = $this->get_sort_param($sort_param_usr);
-        $sort_type = $this->get_sort_type($sort_type_usr);
-        $this_page_first_result = ($page - 1) * $this->num;
+      $allRecords = $pdo->query("SELECT * FROM " . $this->tableName);
+      
+      $page = $this->get_page($page_usr);
+      $sort_param = $this->get_sort_param($sort_param_usr);
+      $sort_type = $this->get_sort_type($sort_type_usr);
+      $this_page_first_result = ($page - 1) * $this->num; 
+       
+      $sql = "SELECT * FROM " . $this->tableName . " ORDER BY :sort_param :sort_type LIMIT :firts_result, :num"; 
+      $statement = $pdo->prepare($sql);
+      $statement->bindValue(':sort_param', $sort_param, \PDO::PARAM_STR); 
+      $statement->bindValue(':sort_type', $sort_type, \PDO::PARAM_STR); 
+      $statement->bindValue(':firts_result', $this_page_first_result, \PDO::PARAM_INT); 
+      $statement->bindValue(':num', $this->num, \PDO::PARAM_INT);         
 
-        $sql = "SELECT * FROM " . $this->tableName . " ORDER BY " . $sort_param . " " . $sort_type  . " LIMIT " . $this_page_first_result . ',' . $this->num;        
-        $currentRecords = $pdo->query($sql);
-        $number_of_results = $allRecords->rowCount();
-        $number_of_pages = ceil($number_of_results/$this->num);
+      $statement->execute(); 
 
-        $result_array['records'] = $currentRecords->fetchAll();        
-        $result_array['number_of_pages'] = $number_of_pages;
+      $number_of_results = $allRecords->rowCount();
+      $number_of_pages = ceil($number_of_results/$this->num);
 
-        return $result_array;
-    }
+      $result_array['records'] = $statement->fetchAll();        
+      $result_array['number_of_pages'] = $number_of_pages;
+
+      return $result_array;
+  }
 }
 
 ?>
