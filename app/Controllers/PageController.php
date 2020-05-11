@@ -79,6 +79,12 @@ class PageController extends Controller {
                 $message = 'Requested method not allowed!';
             break;
 
+            case '503':
+                $code = '503';
+                $errorTitle = ' Service Unavailable';
+                $message = 'Something wrong with connection to Database!';
+            break;
+
             default:
                 $code = '404';
                 $errorTitle = ' Not Found';

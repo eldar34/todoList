@@ -157,7 +157,28 @@ class Auth
         session_start();
         $id = $_SESSION['id'];
 
-        $pdo->query("UPDATE bee_users SET online=0 WHERE id='$id'");
+        try {
+
+            $connection = new Connection();
+            $pdo = $connection->dbConnect();
+            $pdo->beginTransaction();                
+            $sql = "UPDATE bee_users SET online=:lasttime WHERE id=:id";
+            //$pdo->exec("INSERT INTO tasks (name, email, task) 
+            // VALUES ('$name', '$email', '$task')");                
+            $statement = $pdo->prepare($sql);
+            $statement->execute([':id' => $id, ':lasttime' => date('Y-m-d')]);                
+            $pdo->commit();
+        }catch (\PDOException $e) {
+            $pdo->rollBack();
+
+            
+            $response['status'] = 'error';
+            $response['message'] = $e->getMessage();
+            return $response;
+            exit;
+        }
+
+        // $pdo->query("UPDATE bee_users SET online=0 WHERE id='$id'");
         //обнуляется поле online, говорящее, что пользователь вышел с сайта (пригодится в будущем)     
         unset($_SESSION['id']); //удалятся переменная сессии  
 

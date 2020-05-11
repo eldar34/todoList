@@ -65,12 +65,13 @@ class Pagination
       $page = $this->get_page($page_usr);
       $sort_param = $this->get_sort_param($sort_param_usr);
       $sort_type = $this->get_sort_type($sort_type_usr);
-      $this_page_first_result = ($page - 1) * $this->num; 
-       
-      $sql = "SELECT * FROM " . $this->tableName . " ORDER BY :sort_param :sort_type LIMIT :firts_result, :num"; 
+      $this_page_first_result = ($page - 1) * $this->num;
+      
+      $sql = "SELECT * FROM " . $this->tableName . " ORDER BY $sort_param $sort_type LIMIT :num OFFSET :firts_result";       
+      
       $statement = $pdo->prepare($sql);
-      $statement->bindValue(':sort_param', $sort_param, \PDO::PARAM_STR); 
-      $statement->bindValue(':sort_type', $sort_type, \PDO::PARAM_STR); 
+      // $statement->bindValue(':sort_param', $sort_param, \PDO::PARAM_STR); 
+      // $statement->bindValue(':sort_type', $sort_type, \PDO::PARAM_STR); 
       $statement->bindValue(':firts_result', $this_page_first_result, \PDO::PARAM_INT); 
       $statement->bindValue(':num', $this->num, \PDO::PARAM_INT);         
 

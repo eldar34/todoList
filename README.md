@@ -21,5 +21,15 @@ DB_USER_NAME="eldar"  //user name
 DB_PASSWORD="" //password
 </pre>
 
-# DB Dump
-Import backup.sql in your database from folder "dockSet"
+# DB Migrations
+This command create tables in your database
+<pre>
+vendor/bin/phinx migrate -e production
+</pre>
+
+# DB Seeds
+This command populate your database with dummy data
+<pre>
+vendor/bin/phinx seed:run -e production
+</pre>
+
