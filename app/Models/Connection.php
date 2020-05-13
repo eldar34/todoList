@@ -45,10 +45,7 @@ class Connection {
         $myname= getenv('DB_USER_NAME') !== "" ? getenv('DB_USER_NAME') : 'eldar';
         $psc= getenv('DB_PASSWORD') !== "" ? getenv('DB_PASSWORD') : 'changepass';
 
-        $this->dsn = $adapter . ":host=$host;dbname=$db";
-        
-        $pdo = new \PDO($this->dsn, $myname, $psc, $this->opt);
-       
+        $this->dsn = $adapter . ":host=$host;dbname=$db";       
 
         try {
             $pdo = new \PDO($this->dsn, $myname, $psc, $this->opt);
