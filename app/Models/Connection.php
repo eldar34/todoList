@@ -19,11 +19,11 @@ class Connection {
 
     public function exception_db($exception){
 
-        // error_reporting(E_ALL); 
-        // ini_set('display_errors', 1);
-        // exit;
+        /* error_reporting(E_ALL); 
+        ini_set('display_errors', 1);
+        exit;
         echo $exception->getMessage();  
-        exit;      
+        exit;   */    
 
         $host  = $_SERVER['HTTP_HOST'];
         $protocol  = $_SERVER['SERVER_PROTOCOL'];
@@ -45,15 +45,16 @@ class Connection {
         $myname= getenv('DB_USER_NAME') !== "" ? getenv('DB_USER_NAME') : 'eldar';
         $psc= getenv('DB_PASSWORD') !== "" ? getenv('DB_PASSWORD') : 'changepass';
 
-        $this->dsn = $adapter . ":host=$host;dbname=$db";       
+        $this->dsn = $adapter . ":host=$host;dbname=$db"; 
+        $pdo = new \PDO($this->dsn, $myname, $psc, $this->opt);      
 
         try {
             $pdo = new \PDO($this->dsn, $myname, $psc, $this->opt);
         } catch (\PDOException $e) {           
-            // echo "<pre>";
-            // print_r($e->getMessage());
-            // echo "</pre>";
-            // exit;    
+            /* echo "<pre>";
+            print_r($e->getMessage());
+            echo "</pre>";
+            exit;  */   
             return $pdo;       
         }
 
