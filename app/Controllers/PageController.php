@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Controllers\Controller;
-
 use App\Models\Pagination;
 
 class PageController extends Controller {

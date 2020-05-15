@@ -60,7 +60,8 @@ class Pagination
       $connection = new Connection();
       $pdo = $connection->dbConnect();        
 
-      $allRecords = $pdo->query("SELECT * FROM " . $this->tableName);
+      $allRecords = $pdo->prepare("SELECT COUNT(*) FROM " . $this->tableName);
+      $allRecords->execute();
       
       $page = $this->get_page($page_usr);
       $sort_param = $this->get_sort_param($sort_param_usr);
@@ -77,7 +78,7 @@ class Pagination
 
       $statement->execute(); 
 
-      $number_of_results = $allRecords->rowCount();
+      $number_of_results = $allRecords->fetchColumn();
       $number_of_pages = ceil($number_of_results/$this->num);
 
       $result_array['records'] = $statement->fetchAll();        
