@@ -451,8 +451,19 @@ new Vue({
                         }, 3000);                                         
                     }else{
                         
-                        this.dataList = result[1].fields;
-                        $('#updateTask').modal();
+                        if(result[1].status == 'success'){
+                            this.dataList = result[1].fields;
+                            $('#updateTask').modal();
+                        }else{
+                            $('#regSuccess').text(
+                                result[1].errors[1]
+                            );
+                            $('#regSuccess').css("display", "block");
+                            setTimeout(function () {
+                                $('#regSuccess').fadeOut('slow');
+                            }, 3000); 
+                        }
+                        
                         
                     }                   
     
