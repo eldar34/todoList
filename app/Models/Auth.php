@@ -246,11 +246,12 @@ class Auth
                     $this->lastAct($id);
 
                     $response['auth'] = 'login';
-                    $response['user_id'] = $id;
+                    // Full information
+                    /* $response['user_id'] = $id;
                     $response['name'] = $myrow['name'];
                     $response['surname'] = $myrow['surname'];
                     $response['email'] = $myrow['email'];
-                    $response['file'] = $myrow['file'];
+                    $response['file'] = $myrow['file']; */
                     return $response;
                 } else {
                     $error[] = 'User logout';
@@ -278,11 +279,12 @@ class Auth
                     $this->lastAct($id);
 
                     $response['auth'] = 'login';
-                    $response['user_id'] = $id;
+                    // Full information
+                    /* $response['user_id'] = $id;
                     $response['name'] = $myrow['name'];
                     $response['surname'] = $myrow['surname'];
                     $response['email'] = $myrow['email'];
-                    $response['file'] = $myrow['file'];
+                    $response['file'] = $myrow['file']; */
                     return $response;
                 } else {
                     $error[] = 'User logout';
@@ -314,11 +316,12 @@ class Auth
                     $this->lastAct($id);
 
                     $response['auth'] = 'login';
-                    $response['user_id'] = $id;
+                    // Full information
+                    /* $response['user_id'] = $id;
                     $response['name'] = $myrow['name'];
                     $response['surname'] = $myrow['surname'];
                     $response['email'] = $myrow['email'];
-                    $response['file'] = $myrow['file'];
+                    $response['file'] = $myrow['file']; */
                     return $response;
                 } else //если данные из cookie не подошли, эти куки удаляются             
                 {
